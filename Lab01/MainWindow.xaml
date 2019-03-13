@@ -1,0 +1,35 @@
+﻿<Window x:Class="PersonAdder.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PersonAdder"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <ListBox Margin="20" ItemsSource="{Binding Items}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Path=Name}" Width="100" Height="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                        <TextBlock Text="{Binding Path=Age}" Width="100" Height="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                        <Image Source="{Binding Path=PhotoReference}" Width="30" Height="30"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <StackPanel Grid.Column="1" Margin="20" Orientation="Vertical">
+            <TextBlock TextWrapping="Wrap" Text="Name"/>
+            <TextBox Name ="nameTextBox" Height="23" TextWrapping="Wrap" Margin="0,0,0,10"/>
+            <TextBlock TextWrapping="Wrap" Text="Age"/>
+            <TextBox Name="ageTextBox" Height="23" TextWrapping="Wrap" Margin="0,0,0,10" TextChanged="AgeTextBox_TextChanged"/>
+            <Image Name="personPhoto" Height="180" Margin="60,2,60,0" Width="180"/>
+            <Button Content="Upload photo" Height="25.325" Margin="131.299,15,0,0" Click="UploadPhoto_Click"/>
+            <Button x:Name = "addNewPersonButton" Content="Add new person" Click="AddNewPersonButton_Click" Margin="0,17,0,0"/>
+        </StackPanel>
+    </Grid>
+</Window>
