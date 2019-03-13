@@ -22,9 +22,11 @@ namespace PersonAdder
     /// </summary>
     public partial class MainWindow : Window
     {
-        ObservableCollection<Person> people = new ObservableCollection<Person>
-        {
-        };
+		ObservableCollection<Person> people = new ObservableCollection<Person>
+		{
+			new Person { Name = "Janusz", Age = 57, PhotoReference="C:\\Users\\michał\\Pictures\\janusz.png" },
+			new Person { Name = "Bożydar", Age = 96, PhotoReference="C:\\Users\\michał\\Pictures\\bozydar.png" }
+		};
 
         public ObservableCollection<Person> Items
         {
@@ -43,7 +45,8 @@ namespace PersonAdder
 			people.Add(new Person { Age = int.Parse(ageTextBox.Text), Name = nameTextBox.Text, PhotoReference = ((BitmapImage)personPhoto.Source).UriSource.AbsolutePath});
 			ageTextBox.Text = "";
 			nameTextBox.Text = "";
-			personPhoto = new Image();
+			personPhoto.Source = null;
+			addNewPersonButton.IsEnabled = false;
         }
 
 		private void UploadPhoto_Click(object sender, RoutedEventArgs e)
@@ -52,7 +55,7 @@ namespace PersonAdder
 			try
 			{
 				Microsoft.Win32.OpenFileDialog imageDialog = new Microsoft.Win32.OpenFileDialog();
-				imageDialog.InitialDirectory = "c:\\";
+				imageDialog.InitialDirectory = "c:\\Pictures";
 				imageDialog.Filter = "jpg files (*.jpg)|*.jpg| png files (*.png)|*png| bmp files (*.bmp)|*.bmp";
 				imageDialog.FilterIndex = 2;
 				imageDialog.RestoreDirectory = true;

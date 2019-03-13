@@ -15,9 +15,9 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Path=Name}" Width="100" Height="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
-                        <TextBlock Text="{Binding Path=Age}" Width="100" Height="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
-                        <Image Source="{Binding Path=PhotoReference}" Width="30" Height="30"/>
+                        <TextBlock Text="{Binding Path=Name}" Width="100" Height="30" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
+                        <TextBlock Text="{Binding Path=Age}" Width="100" Height="30" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
+                        <Image Source="{Binding Path=PhotoReference}" Width="30" Height="30" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
