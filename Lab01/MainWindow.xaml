@@ -27,9 +27,10 @@
             <TextBox Name ="nameTextBox" Height="23" TextWrapping="Wrap" Margin="0,0,0,10"/>
             <TextBlock TextWrapping="Wrap" Text="Age"/>
             <TextBox Name="ageTextBox" Height="23" TextWrapping="Wrap" Margin="0,0,0,10" TextChanged="AgeTextBox_TextChanged"/>
-            <Image Name="personPhoto" Height="180" Margin="60,2,60,0" Width="180"/>
+            <Image Name="personPhoto" Margin="60,2,60,0" MinHeight="100" Width="236" Height="177" />
             <Button Content="Upload photo" Height="25.325" Margin="131.299,15,0,0" Click="UploadPhoto_Click"/>
             <Button x:Name = "addNewPersonButton" Content="Add new person" Click="AddNewPersonButton_Click" Margin="0,17,0,0"/>
+            
         </StackPanel>
     </Grid>
 </Window>
