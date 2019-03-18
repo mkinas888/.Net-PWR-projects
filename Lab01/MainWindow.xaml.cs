@@ -33,6 +33,7 @@ namespace PersonAdder
         private string[] url;
         private int X;
         private int[] skoki_pocz;
+        bool userLoad;
 
         ObservableCollection<Person> people = new ObservableCollection<Person>
 		{
@@ -63,6 +64,7 @@ namespace PersonAdder
             skoki_pocz[1] = 6;
             skoki_pocz[2] = 9;
             skok_upvote = skoki_pocz[X];
+            userLoad = false;
 
             Rob();
         }
@@ -74,6 +76,7 @@ namespace PersonAdder
 			nameTextBox.Text = "";
 			personPhoto.Source = null;
 			addNewPersonButton.IsEnabled = false;
+            userLoad = false;
         }
 
 		private void UploadPhoto_Click(object sender, RoutedEventArgs e)
@@ -96,6 +99,7 @@ namespace PersonAdder
                     
 					personPhoto.Source = bitmap;
 					addNewPersonButton.IsEnabled = true;
+                    userLoad = true;
 				}
 
 			}
@@ -195,7 +199,7 @@ namespace PersonAdder
                 // Nikc
                 for (int i = 0; i < skok_nick; i++)
                 {
-                    x = urlContent.IndexOf("_2tbHP6ZydRpjI44J3syuqC s1461iz-1 gWXVVu", temp);
+                    x = urlContent.IndexOf("class=\"_2t", temp);
                     temp = x + 1;
                 }
 
@@ -224,7 +228,7 @@ namespace PersonAdder
 
             await Task.Run(() =>
             {
-                // Nikc
+                
                 for (int i = 0; i < skok_meme; i++)
                 {
                     x = urlContent.IndexOf("_2_tDEnGMLxpM6uOa2kaDB3 media-element", temp);
@@ -275,7 +279,9 @@ namespace PersonAdder
                 bimage.BeginInit();
                 bimage.UriSource = new Uri(meme);
                 bimage.EndInit();
-                personPhoto.Source = bimage;
+                if(!userLoad)
+                    personPhoto.Source = bimage;
+                
                 people.Add(new Person { Age = upvotes, Name = name, PhotoReference = meme });
                 if (indeks++ == 7)
                 {
@@ -291,41 +297,6 @@ namespace PersonAdder
                 await Task.Delay(TimeSpan.FromSeconds(3));
             }
         }
-
-
-        //private async void Button_Click(object sender, RoutedEventArgs e)
-        //{
-        //    int indeks = 0;
-        //    while (true)
-        //    {
-                
-        //        var getResultTask = AccessTheWebAsync();
-        //        var test = await getResultTask;
-        //        var getUpvotes = GetUpvotesAsync(test);
-        //        var getMeme = GeMemeAsync(test);
-        //        var getNick = GetNameAsync(test);
-        //        int upvotes = await getUpvotes;
-        //        string name = await getNick;
-        //        string meme = await getMeme;
-        //        //MessageBox.Show(name + " : " + upvotes.ToString());
-        //        BitmapImage bimage = new BitmapImage();
-        //        bimage.BeginInit();
-        //        bimage.UriSource = new Uri(meme);
-        //        bimage.EndInit();
-        //        personPhoto.Source = bimage;
-        //        people.Add(new Person { Age = upvotes, Name = name, PhotoReference = meme });
-        //        if (indeks++ == 7)
-        //        {
-        //            X++;
-        //            skok_upvote = skoki_pocz[X];
-        //            skok_nick = 1;
-        //            skok_meme = 1;
-        //            if (X == 3) X = 0;
-        //        }
-                
-        //        await Task.Delay(3000);
-        //    }
-            
-        //}
+        
     }
 }
