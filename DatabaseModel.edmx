@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="platformyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="memy">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="meme_url" Type="text" />
+          <Property Name="upvotes" Type="real" />
+          <Property Name="data_top" Type="date" />
+          <Property Name="uzytkownik" Type="text" />
+        </EntityType>
+        <EntityType Name="pogoda">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="miasto" Type="text" />
+          <Property Name="temperatura" Type="real" />
+          <Property Name="data_pomiaru" Type="date" />
+        </EntityType>
+        <EntityContainer Name="platformyModelStoreContainer">
+          <EntitySet Name="memy" EntityType="Self.memy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pogoda" EntityType="Self.pogoda" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="platformyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="memy">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="meme_url" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="upvotes" Type="Single" />
+          <Property Name="data_top" Type="DateTime" Precision="0" />
+          <Property Name="uzytkownik" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="pogoda">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="miasto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="temperatura" Type="Single" />
+          <Property Name="data_pomiaru" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityContainer Name="platformyEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="memy" EntityType="Self.memy" />
+          <EntitySet Name="pogoda" EntityType="Self.pogoda" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="platformyModelStoreContainer" CdmEntityContainer="platformyEntities">
+          <EntitySetMapping Name="memy">
+            <EntityTypeMapping TypeName="platformyModel.memy">
+              <MappingFragment StoreEntitySet="memy">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="meme_url" ColumnName="meme_url" />
+                <ScalarProperty Name="upvotes" ColumnName="upvotes" />
+                <ScalarProperty Name="data_top" ColumnName="data_top" />
+                <ScalarProperty Name="uzytkownik" ColumnName="uzytkownik" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pogoda">
+            <EntityTypeMapping TypeName="platformyModel.pogoda">
+              <MappingFragment StoreEntitySet="pogoda">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="miasto" ColumnName="miasto" />
+                <ScalarProperty Name="temperatura" ColumnName="temperatura" />
+                <ScalarProperty Name="data_pomiaru" ColumnName="data_pomiaru" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
