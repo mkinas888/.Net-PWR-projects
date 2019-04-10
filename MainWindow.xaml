@@ -10,6 +10,13 @@
         <Button Content="Load" HorizontalAlignment="Left" Height="33" Margin="49,37,0,0" VerticalAlignment="Top" Width="86" Click="DownloadMeme"/>
         <Button Content="Next Meme" HorizontalAlignment="Left" Height="33" Margin="181,37,0,0" VerticalAlignment="Top" Width="86" Click="NextMeme"/>
         <Image x:Name="Meme" HorizontalAlignment="Left" Height="340" VerticalAlignment="Top" Width="424" Margin="315,26,0,0" />
+        <!--<DataGrid x:Name="weatherEntryDataGrid" AutoGenerateColumns="False" Grid.Column="4" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource platformyEntryViewSource}}" Margin="10,167,10,279" RowDetailsVisibilityMode="VisibleWhenSelected">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="cityColumn1" Binding="{Binding meme_url}" Header="City" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="idColumn1" Binding="{Binding uzytkownik}" Header="Id" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="temperatureColumn1" Binding="{Binding upvotes}" Header="Temperature" Width="SizeToHeader"/>
+            </DataGrid.Columns>
+        </DataGrid>-->
 
     </Grid>
 </Window>
