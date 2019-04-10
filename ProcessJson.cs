@@ -10,7 +10,7 @@ namespace Platformy_projekt
 {
     class ProcessJson
     {
-        static private int MemeIndeks = 1;
+        static private int MemeIndeks = 0;
         public static string NextMeme(JObject JMeme)
         {
             string url = String.Empty;
@@ -18,12 +18,14 @@ namespace Platformy_projekt
             var children = JMeme["data"]["children"];
 
 
-            for (int i = 0; i < MemeIndeks; i++)
-            {
-                url = children[i]["data"]["url"].ToString();
-            }
-           
-            if(MemeIndeks++ > 24) MemeIndeks = 1;
+            //for (int i = 0; i < MemeIndeks; i++)
+            //{
+            //    url = children[i]["data"]["url"].ToString();
+            //}
+
+            url = children[MemeIndeks]["data"]["url"].ToString();
+
+            if (MemeIndeks++ > 23) MemeIndeks = 0;
             
 
             return url;
