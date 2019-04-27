@@ -13,10 +13,10 @@ namespace Platformy_projekt
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class platformyEntities : DbContext
+    public partial class platformyEntities1 : DbContext
     {
-        public platformyEntities()
-            : base("name=platformyEntities")
+        public platformyEntities1()
+            : base("name=platformyEntities1")
         {
         }
     

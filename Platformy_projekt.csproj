@@ -14,6 +14,21 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -67,6 +82,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="SettingsWindow.xaml.cs">
+      <DependentUpon>SettingsWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -80,6 +98,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="SettingsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="memy.cs">
@@ -95,10 +117,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="DatabaseModel.Designer.cs">
+    <Compile Include="Model1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DatabaseModel.edmx</DependentUpon>
+      <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
     <Compile Include="pogoda.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -121,14 +143,16 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="DatabaseModel.edmx">
+    <EntityDeploy Include="Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DatabaseModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="DatabaseModel.edmx.diagram">
-      <DependentUpon>DatabaseModel.edmx</DependentUpon>
+    <None Include="Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\memy.datasource" />
+    <None Include="Properties\DataSources\pogoda.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -138,19 +162,38 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DatabaseModel.edmx</DependentUpon>
+      <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Model1.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DatabaseModel.edmx</DependentUpon>
+      <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
+    </Content>
+    <Content Include="platformy.mdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="platformy_log.ldf">
+      <DependentUpon>platformy.mdf</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

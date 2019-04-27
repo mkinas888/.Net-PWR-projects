@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Data.Entity;
 
 namespace Platformy_projekt
 {
@@ -24,31 +25,24 @@ namespace Platformy_projekt
     public partial class MainWindow : Window
     {
         private JObject jsonMeme;
-        platformyEntities db = new platformyEntities();
-        System.Windows.Data.CollectionViewSource platformyEntryViewSource;
-        System.Windows.Data.CollectionViewSource platformyEntitiesViewSource;
+        platformyEntities1 db = new platformyEntities1();
+        System.Windows.Data.CollectionViewSource memyViewSource;
+        private bool loaded;
 
         public MainWindow()
         {
             InitializeComponent();
-            //    platformyEntryViewSource =
-            //        ((System.Windows.Data.CollectionViewSource)(this.FindResource("platformyEntryViewSource")));
-            //    platformyEntitiesViewSource =
-            //        ((System.Windows.Data.CollectionViewSource)(this.FindResource("platformyEntitiesViewSource")));
+            memyViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("memyViewSource")));
+            DataContext = this;
+            loaded = false;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            
-            db.memy.Local.Concat(db.memy.ToList());
-            platformyEntryViewSource.Source = db.memy.Local;
-            platformyEntitiesViewSource.Source = db.memy.Local;
-            //System.Windows.Data.CollectionViewSource personViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("personViewSource")));
-            //// Load data by setting the CollectionViewSource.Source property:
-            //// personViewSource.Source = [generic data source]
-            //System.Windows.Data.CollectionViewSource productViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("productViewSource")));
-            //// Load data by setting the CollectionViewSource.Source property:
-            //// productViewSource.Source = [generic data source]
+            this.Width = Properties.Settings.Default.Width;
+            this.Height= Properties.Settings.Default.Height;
+            db.memy.Load();
+            memyViewSource.Source = db.memy.Local;
         }
 
 
@@ -59,11 +53,27 @@ namespace Platformy_projekt
             var dataToDatabase = ProcessJson.NextMeme(jsonMeme);
             ChangePicture(dataToDatabase["url"]);
             AddToDatabase(dataToDatabase);
+            loaded = true;
+            MemeChangerAsync();
+        }
+
+        private async void MemeChangerAsync()
+        {
+            if (loaded)
+            {
+                while (true)
+                {
+                    Task delay = Task.Delay(TimeSpan.FromSeconds(30));
+                    await delay;
+                    ChangePicture(ProcessJson.NextMeme(jsonMeme)["url"]);
+                }
+            }
+
+
         }
 
         private void NextMeme(object sender, RoutedEventArgs e)
-        {
-            ChangePicture(ProcessJson.NextMeme(jsonMeme)["url"]);
+        {   if (loaded) ChangePicture(ProcessJson.NextMeme(jsonMeme)["url"]);
         }
 
         private void ChangePicture(string image)
@@ -79,16 +89,20 @@ namespace Platformy_projekt
         {
             var newEntry = new memy()
             {
-                id = 0,
+                //id = ++i,
                 meme_url = data["url"],
                 upvotes = int.Parse(data["score"]),
                 uzytkownik = data["author"],
                 data_top = DateTime.Now
             };
             db.memy.Local.Add(newEntry);
+           
             try
             {
+                
                 db.SaveChanges();
+                memyViewSource.View.Refresh();
+                Debug.WriteLine("OK!");
             }
             catch (Exception ex)
             {
@@ -97,5 +111,11 @@ namespace Platformy_projekt
             }
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            SettingsWindow win = new SettingsWindow();
+            win.Show();
+            
+        }
     }
 }

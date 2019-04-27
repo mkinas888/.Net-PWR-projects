@@ -5,11 +5,39 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Platformy_projekt"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="Fajna apka" Height="600" Width="800" Loaded="Window_Loaded">
+    <Window.Resources>
+        <CollectionViewSource x:Key="memyViewSource" d:DesignSource="{d:DesignInstance {x:Type local:memy}, CreateList=True}"/>
+    </Window.Resources>
+    <Grid DataContext="{StaticResource memyViewSource}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="73*"/>
+            <ColumnDefinition Width="26*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
         <Button Content="Load" HorizontalAlignment="Left" Height="33" Margin="49,37,0,0" VerticalAlignment="Top" Width="86" Click="DownloadMeme"/>
         <Button Content="Next Meme" HorizontalAlignment="Left" Height="33" Margin="181,37,0,0" VerticalAlignment="Top" Width="86" Click="NextMeme"/>
-        <Image x:Name="Meme" HorizontalAlignment="Left" Height="340" VerticalAlignment="Top" Width="424" Margin="315,26,0,0" />
+        <Image x:Name="Meme" HorizontalAlignment="Right" Height="340" VerticalAlignment="Top" Width="424" Margin="315,26,0,0" Grid.ColumnSpan="2" />
+        <DataGrid x:Name="memyDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="0,93,317.366,138" RowDetailsVisibilityMode="VisibleWhenSelected" Width="auto">
+            <DataGrid.Columns>
+                <!--<DataGridTextColumn x:Name="idColumn" Binding="{Binding id}" Header="id" Width="auto"/>-->
+                <DataGridTextColumn x:Name="meme_urlColumn" Binding="{Binding meme_url}" Header="Meme url" Width="auto"/>
+                <DataGridTextColumn x:Name="upvotesColumn" Binding="{Binding upvotes}" Header="Upvotes" Width="auto"/>
+                <DataGridTextColumn x:Name="uzytkownikColumn" Binding="{Binding uzytkownik}" Header="Uzytkownik" Width="auto"/>
+                <DataGridTemplateColumn x:Name="data_topColumn" Header="Data" Width="SizeToHeader">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <DatePicker SelectedDate="{Binding data_top, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Ustawienia" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
         <!--<DataGrid x:Name="weatherEntryDataGrid" AutoGenerateColumns="False" Grid.Column="4" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource platformyEntryViewSource}}" Margin="10,167,10,279" RowDetailsVisibilityMode="VisibleWhenSelected">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="cityColumn1" Binding="{Binding meme_url}" Header="City" Width="SizeToHeader"/>
