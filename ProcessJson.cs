@@ -26,7 +26,27 @@ namespace Platformy_projekt
 
             return data;
         }
-        
+
+        public static Dictionary<string, string> Weather(JObject JWeather)
+        {
+            Dictionary<string, string> data = new Dictionary<string, string>();
+            if (JWeather["cod"].ToString() == "200")
+            {
+
+                data["cod"] = JWeather["cod"].ToString();
+                data["city"] = JWeather["name"].ToString();
+                data["temp"] = JWeather["main"]["temp"].ToString();
+
+                return data;
+            }
+            else
+            {
+                data["cod"] = JWeather["cod"].ToString();
+                return data;
+            }
+            
+        }
+
 
     }
 }

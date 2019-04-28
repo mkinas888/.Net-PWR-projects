@@ -8,6 +8,7 @@
         Title="Fajna apka" Height="600" Width="800" Loaded="Window_Loaded">
     <Window.Resources>
         <CollectionViewSource x:Key="memyViewSource" d:DesignSource="{d:DesignInstance {x:Type local:memy}, CreateList=True}"/>
+        <CollectionViewSource x:Key="pogodaViewSource" d:DesignSource="{d:DesignInstance {x:Type local:pogoda}, CreateList=True}"/>
     </Window.Resources>
     <Grid DataContext="{StaticResource memyViewSource}">
         <Grid.ColumnDefinitions>
@@ -28,23 +29,41 @@
                 <DataGridTextColumn x:Name="meme_urlColumn" Binding="{Binding meme_url}" Header="Meme url" Width="auto"/>
                 <DataGridTextColumn x:Name="upvotesColumn" Binding="{Binding upvotes}" Header="Upvotes" Width="auto"/>
                 <DataGridTextColumn x:Name="uzytkownikColumn" Binding="{Binding uzytkownik}" Header="Uzytkownik" Width="auto"/>
-                <DataGridTemplateColumn x:Name="data_topColumn" Header="Data" Width="SizeToHeader">
+                <DataGridTextColumn x:Name="data_topColumn" Binding="{Binding data_top}" Header="Data" Width="auto" />
+                <!--<DataGridTemplateColumn x:Name="data_topColumn" Header="Data" Width="SizeToHeader">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <DatePicker SelectedDate="{Binding data_top, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                    <DatePicker Binding="{Binding data_top}"/>
+                    , Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
+                </DataGridTemplateColumn>-->
             </DataGrid.Columns>
         </DataGrid>
         <Button Content="Ustawienia" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
-        <!--<DataGrid x:Name="weatherEntryDataGrid" AutoGenerateColumns="False" Grid.Column="4" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource platformyEntryViewSource}}" Margin="10,167,10,279" RowDetailsVisibilityMode="VisibleWhenSelected">
-            <DataGrid.Columns>
-                <DataGridTextColumn x:Name="cityColumn1" Binding="{Binding meme_url}" Header="City" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="idColumn1" Binding="{Binding uzytkownik}" Header="Id" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="temperatureColumn1" Binding="{Binding upvotes}" Header="Temperature" Width="SizeToHeader"/>
-            </DataGrid.Columns>
-        </DataGrid>-->
+        <Grid x:Name="grid1" DataContext="{StaticResource pogodaViewSource}" HorizontalAlignment="Left" Margin="299,19,0,0" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="126"/>
+                <ColumnDefinition Width="26.662"/>
+                <ColumnDefinition Width="17.338"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <!--<Label Content="data pomiaru:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>-->
+            <!--<DatePicker x:Name="data_pomiaruDatePicker" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="0" SelectedDate="{Binding data_pomiaru, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center"/>-->
+            <!--<Label Content="id:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>-->
+            <!--<TextBox x:Name="idTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="1" Text="{Binding id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>-->
+            <Label Content="miasto:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3,0,3" Grid.Row="2" VerticalAlignment="Center"/>
+            <TextBox x:Name="miastoTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="3,4,0,4" Grid.Row="2" Text="{Binding miasto, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Content="temperatura:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3,0,3" Grid.Row="3" VerticalAlignment="Center"/>
+            <TextBox x:Name="temperaturaTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="3,4,0,4" Grid.Row="3" Text="{Binding temperatura, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+        </Grid>
+
 
     </Grid>
 </Window>
