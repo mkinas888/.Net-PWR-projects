@@ -23,6 +23,9 @@
           <Property Name="miasto" Type="text" />
           <Property Name="temperatura" Type="real" />
           <Property Name="data_pomiaru" Type="date" />
+          <Property Name="condition" Type="text" />
+          <Property Name="pressure" Type="real" />
+          <Property Name="speed" Type="real" />
         </EntityType>
         <EntityContainer Name="platformyModelStoreContainer">
           <EntitySet Name="memy" EntityType="Self.memy" Schema="dbo" store:Type="Tables" />
@@ -51,6 +54,9 @@
           <Property Name="miasto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="temperatura" Type="Single" />
           <Property Name="data_pomiaru" Type="DateTime" Precision="0" />
+          <Property Name="pressure" Type="Single" Nullable="true" />
+          <Property Name="speed" Type="Single" Nullable="true" />
+          <Property Name="condition" Type="String" Nullable="true" />
         </EntityType>
         <EntityContainer Name="platformyEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="memy" EntityType="Self.memy" />
@@ -76,6 +82,9 @@
           <EntitySetMapping Name="pogoda">
             <EntityTypeMapping TypeName="platformyModel.pogoda">
               <MappingFragment StoreEntitySet="pogoda">
+                <ScalarProperty Name="speed" ColumnName="speed" />
+                <ScalarProperty Name="pressure" ColumnName="pressure" />
+                <ScalarProperty Name="condition" ColumnName="condition" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="miasto" ColumnName="miasto" />
                 <ScalarProperty Name="temperatura" ColumnName="temperatura" />

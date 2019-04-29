@@ -18,5 +18,8 @@ namespace Platformy_projekt
         public string miasto { get; set; }
         public Nullable<float> temperatura { get; set; }
         public Nullable<System.DateTime> data_pomiaru { get; set; }
+        public Nullable<float> pressure { get; set; }
+        public Nullable<float> speed { get; set; }
+        public string condition { get; set; }
     }
 }

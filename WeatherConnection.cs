@@ -10,7 +10,7 @@ namespace Platformy_projekt
     class WeatherConnection
     {
 
-        public static async Task<string> DownloadAsJson(string city = "Wroclaw")
+        public static async Task<string> DownloadAsJson(string city)
         {
             string apikey = "1b6714e500f0cdd864a8b49ec6ac5e45";
             string weatherURL = "https://api.openweathermap.org/data/2.5/weather";

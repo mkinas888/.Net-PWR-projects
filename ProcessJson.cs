@@ -30,12 +30,19 @@ namespace Platformy_projekt
         public static Dictionary<string, string> Weather(JObject JWeather)
         {
             Dictionary<string, string> data = new Dictionary<string, string>();
+			string conditionState = "";
             if (JWeather["cod"].ToString() == "200")
             {
-
-                data["cod"] = JWeather["cod"].ToString();
+				foreach (var condition in JWeather["weather"])
+				{
+					conditionState += condition["main"].ToString() + " ";
+				}
+				data["cod"] = JWeather["cod"].ToString();
                 data["city"] = JWeather["name"].ToString();
                 data["temp"] = JWeather["main"]["temp"].ToString();
+				data["pressure"] = JWeather["main"]["pressure"].ToString();
+				data["speed"] = JWeather["wind"]["speed"].ToString();
+				data["condition"] = conditionState;
 
                 return data;
             }

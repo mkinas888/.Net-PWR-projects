@@ -26,6 +26,7 @@ namespace Platformy_projekt
     {
         private JObject jsonMeme;
         private JObject jsonWeather;
+		private string backgroundImage;
         platformyEntities1 db = new platformyEntities1();
         System.Windows.Data.CollectionViewSource memyViewSource;
         System.Windows.Data.CollectionViewSource pogodaViewSource;
@@ -36,7 +37,8 @@ namespace Platformy_projekt
             InitializeComponent();
             memyViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("memyViewSource")));
             pogodaViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("pogodaViewSource")));
-            DataContext = this;
+			backgroundImage = "https://previews.123rf.com/images/paulgrecaud/paulgrecaud1510/paulgrecaud151000019/47674323-city-park-alley-at-sunny-autumn-day-nature-background.jpg";
+			DataContext = this;
             loaded = false;
         }
 
@@ -51,9 +53,9 @@ namespace Platformy_projekt
             CheckWeather();
         }
 
-        private async void CheckWeather()
+        private async void CheckWeather(string city = "Wroclaw")
         {
-            string jsonInStringWeather = await WeatherConnection.DownloadAsJson();
+            string jsonInStringWeather = await WeatherConnection.DownloadAsJson(city);
             jsonWeather = JObject.Parse(jsonInStringWeather);
             var dataToDatabse = ProcessJson.Weather(jsonWeather);
             AddWeatherToDatabase(dataToDatabse);
@@ -134,12 +136,16 @@ namespace Platformy_projekt
             {
                 case "200":
                     {
-                        var newEntry = new pogoda()
-                        {
-                            miasto = data["city"],
-                            temperatura = (float) Math.Round((double.Parse(data["temp"]) - 273.15), 2),
-                            data_pomiaru = DateTime.Now
-                        };
+						var newEntry = new pogoda()
+						{
+							miasto = data["city"],
+							temperatura = (float)Math.Round((double.Parse(data["temp"]) - 273.15), 2),
+							data_pomiaru = DateTime.Now,
+							pressure = float.Parse(data["pressure"]),
+							speed = float.Parse(data["speed"]),
+							condition = data["condition"]
+
+						};
                         db.pogoda.Local.Add(newEntry);
 
                         try
@@ -179,5 +185,14 @@ namespace Platformy_projekt
             win.Show();
             
         }
-    }
+
+		private void MiastoTextBox_KeyUp(object sender, KeyEventArgs e)
+		{
+			if(e.Key == Key.Enter)
+			{
+				CheckWeather(miastoTextBox.Text);
+				e.Handled = true;
+			}
+		}
+	}
 }
