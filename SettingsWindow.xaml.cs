@@ -24,6 +24,7 @@ namespace Platformy_projekt
             InitializeComponent();
             TxtHeight.Text = Properties.Settings.Default.Height.ToString();
             TxtWidth.Text = Properties.Settings.Default.Width.ToString();
+			TxtInitialCity.Text = Properties.Settings.Default.InitialCity.ToString();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -32,6 +33,7 @@ namespace Platformy_projekt
             {
                 Properties.Settings.Default.Width = double.Parse(TxtWidth.Text);
                 Properties.Settings.Default.Height = double.Parse(TxtHeight.Text);
+				Properties.Settings.Default.InitialCity = TxtInitialCity.Text.ToString();
             }
             catch(Exception /*ex*/)
             {

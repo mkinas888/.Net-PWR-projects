@@ -26,7 +26,6 @@ namespace Platformy_projekt
     {
         private JObject jsonMeme;
         private JObject jsonWeather;
-		private string backgroundImage;
         platformyEntities1 db = new platformyEntities1();
         System.Windows.Data.CollectionViewSource memyViewSource;
         System.Windows.Data.CollectionViewSource pogodaViewSource;
@@ -35,25 +34,69 @@ namespace Platformy_projekt
         public MainWindow()
         {
             InitializeComponent();
-            memyViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("memyViewSource")));
+			memyViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("memyViewSource")));
             pogodaViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("pogodaViewSource")));
-			backgroundImage = "https://previews.123rf.com/images/paulgrecaud/paulgrecaud1510/paulgrecaud151000019/47674323-city-park-alley-at-sunny-autumn-day-nature-background.jpg";
 			DataContext = this;
             loaded = false;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+			var miastoTextBox = this.FindName("miastoTextBox") as TextBox;
+			miastoTextBox.BorderBrush = new SolidColorBrush(Colors.Transparent);
             this.Width = Properties.Settings.Default.Width;
             this.Height = Properties.Settings.Default.Height;
-            db.memy.Load();
+			db.memy.Load();
             db.pogoda.Load();
             memyViewSource.Source = db.memy.Local;
             pogodaViewSource.Source = db.pogoda.Local;
-            CheckWeather();
+			CreateListHistory();
+			CheckWeather(Properties.Settings.Default.InitialCity);
         }
 
-        private async void CheckWeather(string city = "Wroclaw")
+		private void CreateListHistory()
+		{
+			var myListViewVar = this.FindName("locationList") as ListView;
+			foreach (var weatherElem in db.pogoda.Local)
+			{
+				var item = new ListViewItem();
+				var panel = new StackPanel
+				{
+					Name = "stackPanel" + weatherElem.id,
+					Orientation = Orientation.Horizontal,
+				};
+				var textPanel = new TextBlock
+				{
+					Name = "textPanel" + weatherElem.id,
+					Text = weatherElem.condition + " " + weatherElem.temperatura + "°C" + " " + weatherElem.miasto,
+					Width = 215
+				};
+				var closeButton = new Button
+				{
+					Name = "closeButton" + weatherElem.id,
+					BorderBrush = new SolidColorBrush(Colors.Transparent),
+					HorizontalAlignment = HorizontalAlignment.Right,
+					Background = new ImageBrush { ImageSource = new BitmapImage(new Uri("https://static.thenounproject.com/png/26894-200.png")) },
+					Height = 20,
+					Width = 20,
+				};
+				closeButton.Click += (sender2, e2) => DeleteRecordHandler(sender2, e2, weatherElem.id, item, myListViewVar);
+				panel.Children.Add(textPanel);
+				panel.Children.Add(closeButton);
+				item.Content = panel;
+				myListViewVar.Items.Add(item);
+			}
+		}
+
+		private void DeleteRecordHandler(object sender, EventArgs e, int id, ListViewItem item , ListView list)
+		{
+			pogoda pg = db.pogoda.Local.First(x => x.id == id);
+			db.pogoda.Local.Remove(pg);
+			db.SaveChanges();
+			list.Items.Remove(item);
+		}
+
+        private async void CheckWeather(string city)
         {
             string jsonInStringWeather = await WeatherConnection.DownloadAsJson(city);
             jsonWeather = JObject.Parse(jsonInStringWeather);
@@ -98,7 +141,7 @@ namespace Platformy_projekt
             bi3.BeginInit();
             bi3.UriSource = new Uri(image);
             bi3.EndInit();
-            this.Meme.Source = bi3;
+            //this.Meme.Source = bi3;
         }
 
         private void AddMemeToDatabase(Dictionary<string,string> data)
@@ -152,9 +195,35 @@ namespace Platformy_projekt
                         {
 
                             db.SaveChanges();
-                            //pogodaViewSource.View.Refresh();
                             pogodaViewSource.View.MoveCurrentToLast();
-                            Debug.WriteLine("OK!");
+							var myListViewVar = this.FindName("locationList") as ListView;
+							var item = new ListViewItem();
+							var panel = new StackPanel
+							{
+								Name = "stackPanel" + newEntry.id,
+								Orientation = Orientation.Horizontal,
+							};
+							var textPanel = new TextBlock
+							{
+								Name = "textPanel" + newEntry.id,
+								Text = newEntry.condition + " " + newEntry.temperatura + "°C" + " " + newEntry.miasto,
+								Width = 215
+							};
+							var closeButton = new Button
+							{
+								Name = "closeButton" + newEntry.id,
+								BorderBrush = new SolidColorBrush(Colors.Transparent),
+								HorizontalAlignment = HorizontalAlignment.Right,
+								Background = new ImageBrush { ImageSource = new BitmapImage(new Uri("https://static.thenounproject.com/png/26894-200.png")) },
+								Height = 20,
+								Width = 20,
+							};
+							closeButton.Click += (sender2, e2) => DeleteRecordHandler(sender2, e2, newEntry.id, item, myListViewVar);
+							panel.Children.Add(textPanel);
+							panel.Children.Add(closeButton);
+							item.Content = panel;
+							myListViewVar.Items.Add(item);
+							Debug.WriteLine("OK!");
                         }
                         catch (Exception ex)
                         {

@@ -8,5 +8,8 @@
     <Setting Name="Height" Type="System.Double" Scope="User">
       <Value Profile="(Default)">720</Value>
     </Setting>
+    <Setting Name="InitialCity" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Wroclaw</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

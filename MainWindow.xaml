@@ -10,47 +10,43 @@
         <CollectionViewSource x:Key="memyViewSource" d:DesignSource="{d:DesignInstance {x:Type local:memy}, CreateList=True}"/>
         <CollectionViewSource x:Key="pogodaViewSource" d:DesignSource="{d:DesignInstance {x:Type local:pogoda}, CreateList=True}"/>
     </Window.Resources>
-    <Grid DataContext="{StaticResource memyViewSource}">
+    <Grid DataContext="{StaticResource pogodaViewSource}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="499*"/>
+            <ColumnDefinition Width="293*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="570"/>
         </Grid.RowDefinitions>
-
-        <Button Content="Load" HorizontalAlignment="Left" Height="33" Margin="0.325,344.53,0,0" VerticalAlignment="Top" Width="86" Click="DownloadMeme" Grid.Column="1"/>
-        <Button Content="Next Meme" HorizontalAlignment="Left" Height="33" Margin="72.325,323,0,0" VerticalAlignment="Top" Width="86" Click="NextMeme" RenderTransformOrigin="0.507,0.522" Grid.Column="1"/>
-        <Image x:Name="Meme" HorizontalAlignment="Right" Height="340" VerticalAlignment="Top" Width="424" Margin="0,26,0,0" Grid.ColumnSpan="2" />
-        <Button Content="Ustawienia" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Click="Button_Click" Grid.Column="1" Margin="31.584,276.05,0,0" Height="21.96"/>
-        <Grid x:Name="grid1" DataContext="{StaticResource pogodaViewSource}" HorizontalAlignment="Left" Margin="41.207,26,0,0" VerticalAlignment="Top" Width="326.793" Height="534">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" MinHeight="50"/>
-                <RowDefinition Height="Auto" MinHeight="50"/>
-                <RowDefinition Height="Auto" MinHeight="50"/>
-                <RowDefinition Height="Auto" MinHeight="50"/>
-                <RowDefinition Height="Auto" MinHeight="50"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-
-            <!--<Label Content="data pomiaru:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>-->
-            <!--<DatePicker x:Name="data_pomiaruDatePicker" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="0" SelectedDate="{Binding data_pomiaru, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center"/>-->
-            <!--<Label Content="id:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>-->
-            <!--<TextBox x:Name="idTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="1" Text="{Binding id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>-->
-            <Label Content="Miasto" Grid.Column="0" Margin="10.5,0,0,0" Grid.Row="0" Height="25.96" VerticalAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Width="143.396"/>
-            <TextBox x:Name="miastoTextBox" Grid.Column="1" Grid.Row="0" Margin="9.999,0,0,0" Text="{Binding miasto, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true, UpdateSourceTrigger=PropertyChanged}" KeyUp="MiastoTextBox_KeyUp" HorizontalAlignment="Center" Width="143.396" Height="24" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-            <Label Content="Temperatura &#176;C:" Grid.Column="0" Margin="10,37.9,0,0" Grid.Row="1" HorizontalAlignment="Center" Width="143.396" Height="25.96" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
-            <TextBlock x:Name="temperaturaTextBox" Grid.Column="1" Margin="9.999,39.86,0,0" Text="{Binding temperatura, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="1" Height="24" VerticalAlignment="Center" HorizontalAlignment="Center" Width="143.396"/>
-            <Label Content="Conditions:" Grid.Column="0" Margin="10,27.128,0,0" Grid.Row="2" HorizontalAlignment="Center" Width="143.396" Height="25.96" VerticalAlignment="Center"/>
-            <TextBlock x:Name="conditionTextBox" Grid.Column="1" Grid.Row="2" Margin="9.999,14.178,0,0" Text="{Binding condition, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Height="15.96" VerticalAlignment="Center" HorizontalAlignment="Center" Width="143.396"/>
-            <Label Content="Pressure:" Grid.Column="0" Margin="0,26.551,10.001,0" Grid.Row="3" HorizontalAlignment="Center" Width="143.396" Height="25.96" VerticalAlignment="Center"/>
-            <TextBlock x:Name="pressureTextBox" Grid.Column="1" Margin="0,44.501,10.001,0" Text="{Binding pressure, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"  Grid.Row="3" Height="24" VerticalAlignment="Center" HorizontalAlignment="Center" Width="143.396"/>
-            <Label Content="Wind speed:" Grid.Column="0" Margin="0,26.743,10.001,0" Grid.Row="4" HorizontalAlignment="Center" Width="143.396" Height="25.96" VerticalAlignment="Center"/>
-            <TextBlock x:Name="speedTextBox" Grid.Column="1" Margin="9.999,26.743,0,0" Text="{Binding speed, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"  Grid.Row="4" Height="15.96" VerticalAlignment="Center" HorizontalAlignment="Center" Width="143.396"/>
-        </Grid>
+        <Button Content="Ustawienia" Click="Button_Click" Grid.Column="1" Margin="0,10,10,0" MinWidth="100" HorizontalAlignment="Right" Width="100" Height="21.96" VerticalAlignment="Top"/>
+        <TextBlock x:Name="conditionTextBox" Grid.Column="1" Margin="144,112.49,10,431.51" Text="{Binding condition, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Height="26" VerticalAlignment="Center" HorizontalAlignment="Center" Width="139"/>
+        <TextBlock x:Name="pressureTextBox" Grid.Column="1" Margin="144,145.45,10,400.55" Text="{Binding pressure, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Height="24" VerticalAlignment="Center" HorizontalAlignment="Center" Width="139"/>
+        <TextBlock x:Name="speedTextBox" Grid.Column="1" Margin="144,174.41,10,369.59" Text="{Binding speed, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Height="26" VerticalAlignment="Center" HorizontalAlignment="Center" Width="139"/>
+        <TextBox x:Name="miastoTextBox" Grid.Row="0" Margin="144,52.57,10,493.43" Text="{Binding miasto, Mode=TwoWay, NotifyOnValidationError=true, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true}" KeyUp="MiastoTextBox_KeyUp" HorizontalAlignment="Center" Width="139" Height="24" VerticalAlignment="Center" VerticalContentAlignment="Center" Grid.Column="1">
+            <TextBox.Background>
+                <SolidColorBrush Color="White" Opacity="0"/>
+            </TextBox.Background>
+            <TextBox.BorderBrush>
+                <LinearGradientBrush EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
+                    <GradientStop Color="#FFABADB3" Offset="0.05"/>
+                    <GradientStop Color="#FFE2E3EA" Offset="0.07"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </TextBox.BorderBrush>
+        </TextBox>
+        <Label Content="Change City" Grid.Column="1" Margin="10.896,50.61,167.208,493.43" Grid.Row="0" Height="25.96" VerticalAlignment="Center" HorizontalAlignment="Center" Width="114.896" HorizontalContentAlignment="Stretch"/>
+        <ListView x:Name="locationList" Grid.Column="1" HorizontalAlignment="Center" Height="341.54" Margin="10,218.46,10,10" VerticalAlignment="Center" Width="273">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Searching History" Width="245">
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Label Content="Temperatura °C:" Grid.Column="1" Margin="10.896,81.57,168.104,462.47" HorizontalAlignment="Center" Width="114" Height="25.96" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch"/>
+        <TextBlock x:Name="temperaturaTextBox" Margin="144,83.53,10,462.47" Text="{Binding temperatura, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Height="24" VerticalAlignment="Center" HorizontalAlignment="Center" Width="139" Grid.Column="1"/>
+        <Label Content="Conditions:" Grid.Column="1" Margin="10.896,112.53,168.104,431.51" HorizontalAlignment="Center" Width="114" Height="25.96" VerticalAlignment="Center" HorizontalContentAlignment="Stretch"/>
+        <Label Content="Pressure:" Grid.Column="1" Margin="10.896,143.49,168.104,400.55" HorizontalAlignment="Center" Width="114" Height="25.96" VerticalAlignment="Center" HorizontalContentAlignment="Stretch"/>
+        <Label Content="Wind speed:" Grid.Column="1" Margin="10.896,174.45,168.104,369.59" HorizontalAlignment="Center" Width="114" Height="25.96" VerticalAlignment="Center" HorizontalContentAlignment="Stretch"/>
     </Grid>
 </Window>
