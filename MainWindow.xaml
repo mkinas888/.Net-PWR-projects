@@ -18,6 +18,9 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="570"/>
         </Grid.RowDefinitions>
+        <Button Content="Load" HorizontalAlignment="Center" Height="33" Margin="281.575,22.02,85.25,514.98" VerticalAlignment="Center" Width="132.175" Click="DownloadMeme"/>
+        <Button Content="Next Meme" HorizontalAlignment="Center" Height="33" Margin="116.838,22.02,250.838,514.98" VerticalAlignment="Center" Width="131.324" Click="NextMeme" RenderTransformOrigin="0.507,0.522"/>
+        <Image x:Name="Meme" HorizontalAlignment="Right" Height="478.43" VerticalAlignment="Top" Width="479" Margin="0,81.57,10,0"/>
         <Button Content="Ustawienia" Click="Button_Click" Grid.Column="1" Margin="0,10,10,0" MinWidth="100" HorizontalAlignment="Right" Width="100" Height="21.96" VerticalAlignment="Top"/>
         <TextBlock x:Name="conditionTextBox" Grid.Column="1" Margin="144,112.49,10,431.51" Text="{Binding condition, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Height="26" VerticalAlignment="Center" HorizontalAlignment="Center" Width="139"/>
         <TextBlock x:Name="pressureTextBox" Grid.Column="1" Margin="144,145.45,10,400.55" Text="{Binding pressure, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Height="24" VerticalAlignment="Center" HorizontalAlignment="Center" Width="139"/>

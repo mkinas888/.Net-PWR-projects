@@ -141,7 +141,7 @@ namespace Platformy_projekt
             bi3.BeginInit();
             bi3.UriSource = new Uri(image);
             bi3.EndInit();
-            //this.Meme.Source = bi3;
+            this.Meme.Source = bi3;
         }
 
         private void AddMemeToDatabase(Dictionary<string,string> data)
